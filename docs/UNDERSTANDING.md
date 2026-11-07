@@ -44,20 +44,3 @@ Voxel grid = fewer points. SOR = remove junk. RANSAC = find a plane despite junk
 * Problem: a bump taller than the RANSAC threshold is not an inlier, so inliers alone hide it. Fix: gather a wider band (+-5 cm) of points around the plane, restricted to the plane's own extent and excluding points owned by other planes.
 * Problem 2: max |deviation| is useless; one outlier ruins it (first run: 40-50 mm "bumps" on flat walls). Fix: bin points into 5 cm cells in the plane's (u,v) coordinates, take the **median** per cell, report extremes of the medians. Robust statistics: a median ignores a few outliers.
 * Noise floor: extremes over hundreds of noisy cells are ~+-7 mm even on a perfect plane, so anything much larger than that (30 mm) is real. Always know your noise floor before claiming a detection.
-
-## 7. Questions an interviewer may ask (answer without looking)
-1. Why RANSAC and not just least squares on everything? (LS is dragged by outliers: it has a 0 % breakdown point.)
-2. How many iterations do you need and why? (formula above)
-3. How did you choose the threshold? (sensor noise, sweep results)
-4. Why a k-d tree? What is its worst case? (high dimensions / degenerate data -> O(n); voxel hashing is an alternative)
-5. Why is your pipeline slow, and how would you speed it up? (SOR; profile numbers are printed per stage)
-6. How would you add ICP / an EKF? (point-to-plane ICP between frames using the plane normals; EKF state = plane (n, d), predicted from IMU/odometry, updated by the RANSAC result)
-7. What would break on a real sensor? (range-dependent noise, multipath, occlusion, non-planar clutter, calibration error)
-
-## 8. Drills (do these; each takes 10-20 min)
-1. Set RANSAC `maxIters` fixed at 1000 and disable the adaptive update. Compare iterations and time.
-2. Set the threshold to 3 mm, then 100 mm; explain every change in the output.
-3. Delete the `floor` -> `(int)` bug fix on purpose (use `static_cast<int>(p.x*inv)`) and watch the voxel unit test fail.
-4. Replace the median with the mean in the flatness map and rerun with the outliers on.
-5. Add 20 % outliers to `makeRoom`; at what point does SOR stop helping?
-6. Implement point-to-plane ICP (one iteration = solve a 6x6 linear system) and test it on two rotated copies of the room.
