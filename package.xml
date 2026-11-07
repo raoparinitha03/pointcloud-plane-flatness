@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>planeperc</name>
+  <version>0.1.0</version>
+  <description>From-scratch point-cloud plane extraction and flatness analysis (voxel grid, KD-tree, SOR, RANSAC, LS fit)</description>
+  <maintainer email="raoparinitha03@gmail.com">Parinitha P Rao</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

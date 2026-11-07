@@ -1,0 +1,28 @@
+=== Single run: 134106 raw pts -> 74945 after voxel(30 mm) -> 71597 after SOR ===
+time: voxel 19.4 ms | SOR 513.3 ms | RANSAC 34.1 ms | flatness 12.9 ms | total 579.7 ms
+plane 0 ~ floor  z=0 | normal err 0.001 deg | offset err 0.05 mm | inlier ratio 45.7% | RANSAC iters 65
+          flatness: rms 4.05 mm | p95 7.02 mm | cell-median peak +7.32 mm | valley -6.23 mm (n=32993)
+plane 1 ~ wallB  y=0 | normal err 0.001 deg | offset err 0.03 mm | inlier ratio 29.6% | RANSAC iters 28
+          flatness: rms 4.07 mm | p95 7.01 mm | cell-median peak +7.50 mm | valley -6.92 mm (n=21327)
+plane 2 ~ wallA  x=0 | normal err 0.001 deg | offset err 0.12 mm | inlier ratio 23.2% | RANSAC iters 5
+          flatness: rms 4.54 mm | p95 7.43 mm | cell-median peak +31.22 mm | valley -5.85 mm (n=16927)
+ground truth: bump on wallA = 30.0 mm peak (toward room) | sensor noise sigma = 4.0 mm
+
+=== Sweep (3 seeds each) ===
+voxel_mm thr_mm | normal_err_deg planes inlier% bump_est_mm  time_ms
+      0      5 |          0.019    6.0    26.0         31.2   1216.1
+      0     10 |          0.002    6.0    32.7         32.2   1180.0
+      0     20 |          0.004    3.0    33.2         31.3   1091.7
+      0     50 |          0.017    3.0    33.3         31.1   1092.7
+     30      5 |          0.024    6.0    27.2         32.1    606.6
+     30     10 |          0.002    3.3    32.8         32.1    588.9
+     30     20 |          0.004    3.0    33.1         32.0    589.0
+     30     50 |          0.017    3.0    33.2         31.9    587.6
+     50      5 |          0.055    4.3    28.9         28.3    251.2
+     50     10 |          0.002    3.0    32.5         28.5    246.4
+     50     20 |          0.005    3.0    32.7         28.4    251.1
+     50     50 |          0.013    3.0    32.8         28.3    245.3
+    100      5 |          0.073    5.3    22.9         25.5     77.8
+    100     10 |          0.008    3.0    27.6         25.6     66.3
+    100     20 |          0.005    3.0    27.9         25.4     74.2
+    100     50 |          0.035    3.0    28.2         65.8     81.7
